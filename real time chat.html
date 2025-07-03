@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT Style Bot</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat-container {
+      width: 400px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .chat-messages {
+      padding: 15px;
+      height: 300px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg {
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+    .user {
+      align-self: flex-end;
+      background: #DCF8C6;
+    }
+    .bot {
+      align-self: flex-start;
+      background: #E2E2E2;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    .chat-input button {
+      padding: 10px 15px;
+      background: #4CAF50;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <i class="fa-solid fa-robot"></i> REAL-TIME CHAT APPLICATION
+    </div>
+    <div class="chat-messages" id="chat">
+      <div class="msg bot">Hi! I'm your AI assistant. How can I help you today?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chat = document.getElementById("chat");
+      const userMsg = document.createElement("div");
+      userMsg.className = "msg user";
+      userMsg.innerText = input.value;
+      chat.appendChild(userMsg);
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "msg bot";
+      botMsg.innerText = getBotReply(input.value);
+      chat.appendChild(botMsg);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+      function getBotReply(message) {
+  message = message.toLowerCase();
+
+  if (message.includes("hello") || message.includes("hi")) return "Hello! 😊 How can I assist you today?";
+  if (message.includes("how are you")) return "I'm just a bot, but I'm functioning perfectly! Thanks for asking 🤖";
+  if (message.includes("what is your name")) return "I'm ChatBot, your virtual assistant!";
+  if (message.includes("what can you do")) return "I can chat with you, answer questions, and help you with simple tasks!";
+  if (message.includes("bye")) return "Goodbye! 👋 Have a nice day!";
+  if (message.includes("thank you")) return "You're welcome! 😊";
+  if (message.includes("what time is it")) return `It's ${new Date().toLocaleTimeString()}`;
+  if (message.includes("date today")) return `Today's date is ${new Date().toLocaleDateString()}`;
+  if (message.includes("tell me a joke")) return "Why don't scientists trust atoms? Because they make up everything! 😂";
+  if (message.includes("help")) return "Sure! Tell me what you need help with.";
+
+  return "I'm not sure how to respond to that yet. 🤔";
+}
+</script>
+</body>
+</html>
